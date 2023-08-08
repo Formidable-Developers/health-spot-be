@@ -1,0 +1,63 @@
+import { Gender } from "./user"
+
+@Entity()
+export class MedicalReport extends BaseEntity {
+    @PrimaryGeneratedColumn()
+    id: number
+    user: User // TODO: 1 to 1 relationship
+    DateOfBirth: Date
+    gender: Gender
+    address: string
+    medicalHistory: MedicalHistory
+}
+
+@Entity()
+export class MedicalHistory extends BaseEntity {
+    @PrimaryGeneratedColumn()
+    id: number
+    // A history of the patient's previous medical conditions and illnesses.
+    pastMedicalConditions: string[]
+
+    // Information about medical conditions that run in the patient's family.
+    familyMedicalHistory: string[]
+
+    // Any known allergies or adverse reactions to medications or substances.
+    allergies: string[]
+
+    // A list of medications the patient is currently taking or has taken in the past.    
+    medicationHistory: MedicationHistory[]
+    recordedOn: Date
+}
+
+@Entity()
+export class VitalSign extends BaseEntity {
+    @PrimaryGeneratedColumn()
+    id: number
+    // The patient's blood pressure readings.
+    bloodPressure: string
+    // The patient's heart rate (pulse) measurement.
+    heartRate: string
+    // The patient's breathing rate.
+    respiratoryRate: string
+    // The patient's body temperature.
+    bodyTemperature: string
+}
+
+@Entity()
+export class Treatment extends BaseEntity {
+    @PrimaryGeneratedColumn()
+    id: number
+    diagnosis: string
+    plan: string
+    medicationOrders: string
+    surgicalProcedures: string
+}
+
+
+@Entity()
+export class MedicationHistory extends BaseEntity {
+    @PrimaryGeneratedColumn()
+    id: number
+    diagnosis: string
+    drugs: string[]
+}

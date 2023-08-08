@@ -1,5 +1,22 @@
 import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm"
 
+export enum UserType {
+    DEFAULT_USER,
+    HEALTH_SPOT_SUPER_USER,
+    HEALTH_SPOT_USER,
+    HOSPITAL_SUPER_USER,
+    HOSPITAL_USER,
+    INSURANCE_COMPANY_SUPER_USER,
+    INSURANCE_COMPANY_USER,
+    PHARMACY_SUPER_USER,
+    PHARMACY_USER,
+}
+
+export enum Gender {
+    MALE,
+    FEMALE,
+    RATHER_NOT_SAY,
+}
 
 @Entity()
 export class User extends BaseEntity {
@@ -7,10 +24,13 @@ export class User extends BaseEntity {
     id: number
 
     @Column()
-    firstName: string
+    type: UserType
 
     @Column()
-    lastName: string
+    firstName?: string
+
+    @Column()
+    lastName?: string
 
     @Column()
     email: string
@@ -24,3 +44,4 @@ export class User extends BaseEntity {
     @Column()
     joinedAt: Date
 }
+
